@@ -1,1 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earmarked — Terms and Conditions & Privacy Policy</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --surface: #FFFFFF;
+    --text: #1A1A1A;
+    --text-secondary: #5C5C5C;
+    --accent: #E8725A;
+    --accent-light: #FDF0ED;
+    --border: #E8E6E1;
+    --heading: #111111;
+    --font-body: 'DM Sans', sans-serif;
+    --font-display: 'DM Serif Display', serif;
+    --max-width: 720px;
+  }
 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* --- Header bar --- */
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250, 250, 248, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .top-bar .logo {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+
+  /* --- Hero / Title --- */
+  .hero {
+    text-align: center;
+    padding: 80px 24px 56px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 48px;
+    color: var(--heading);
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+  .hero .subtitle {
+    font-size: 18px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+  .hero .date {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  /* --- Layout --- */
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* --- Table of Contents --- */
+  .toc {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .toc h2 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--heading);
+    margin-bottom: 20px;
+  }
+  .toc-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 48px;
+  }
+  .toc a {
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 0;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .toc a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .toc .toc-part {
+    font-weight: 700;
+    color: var(--heading);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 16px 0 6px;
+    border-bottom: none;
+    grid-column: 1 / -1;
+  }
+  .toc .toc-part:first-child { padding-top: 0; }
+
+  /* --- Content sections --- */
+  .part-divider {
+    padding: 56px 0 24px;
+    border-top: 3px solid var(--accent);
+    margin-top: 56px;
+  }
+  .part-divider:first-of-type { margin-top: 0; }
+  .part-divider h2 {
+    font-family: var(--font-display);
+    font-size: 32px;
+    color: var(--heading);
+    letter-spacing: -0.02em;
+  }
+
+  section {
+    padding: 36px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-child { border-bottom: none; }
+
+  section h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--heading);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  section h4 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--heading);
+    margin: 24px 0 8px;
+  }
+
+  section p {
+    margin-bottom: 14px;
+    color: var(--text);
+  }
+  section p:last-child { margin-bottom: 0; }
+
+  section p.indent {
+    padding-left: 24px;
+  }
+
+  .contact-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-top: 12px;
+  }
+  .contact-block p {
+    margin-bottom: 4px;
+    font-size: 15px;
+  }
+  .contact-block strong {
+    font-size: 16px;
+  }
+
+  em.leg { font-style: italic; }
+
+  a.email {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  a.email:hover { border-bottom-color: var(--accent); }
+
+  /* --- Footer --- */
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+
+  /* --- Back to top --- */
+  .back-top {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s, transform 0.3s;
+    box-shadow: 0 2px 12px rgba(232,114,90,0.3);
+  }
+  .back-top.visible { opacity: 1; transform: translateY(0); }
+
+  /* --- Responsive --- */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 34px; }
+    .toc-columns { grid-template-columns: 1fr; }
+    .part-divider h2 { font-size: 26px; }
+    section h3 { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span class="logo">Earmarked</span>
+  <span>Last updated: 6 April 2026</span>
+</div>
+
+<div class="hero">
+  <h1>Earmarked</h1>
+  <div class="subtitle">Terms and Conditions &amp; Privacy Policy</div>
+  <span class="date">Last Updated: 6 April 2026</span>
+</div>
+
+<div class="container">
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <h2>Contents</h2>
+    <div class="toc-columns">
+      <span class="toc-part">Part 1 — Terms and Conditions</span>
+      <a href="#t1">1. Introduction and Acceptance</a>
+      <a href="#t2">2. Eligibility</a>
+      <a href="#t3">3. Nature of the Service</a>
+      <a href="#t4">4. Local-First Architecture and Data Ownership</a>
+      <a href="#t5">5. Subscription and Payment</a>
+      <a href="#t6">6. Intellectual Property</a>
+      <a href="#t7">7. Limitation of Liability</a>
+      <a href="#t8">8. Disclaimers</a>
+      <a href="#t9">9. Acceptable Use</a>
+      <a href="#t10">10. Termination</a>
+      <a href="#t11">11. Indemnification</a>
+      <a href="#t12">12. Application Updates and Modifications</a>
+      <a href="#t13">13. Dispute Resolution</a>
+      <a href="#t14">14. Business Continuity and Change of Ownership</a>
+      <a href="#t15">15. Apple App Store Terms</a>
+      <a href="#t16">16. Entire Agreement</a>
+      <a href="#t17">17. Severability</a>
+      <span class="toc-part">Part 2 — Privacy Policy</span>
+      <a href="#p1">1. Overview</a>
+      <a href="#p2">2. Data Stored Locally on Your Device</a>
+      <a href="#p3">3. Information We Do Not Collect</a>
+      <a href="#p4">4. Information Involved in Using the Application</a>
+      <a href="#p5">5. How We Use Information</a>
+      <a href="#p6">6. Third-Party Disclosure</a>
+      <a href="#p7">7. Data Retention and Deletion</a>
+      <a href="#p8">8. Data Security</a>
+      <a href="#p9">9. Data Breach Notification</a>
+      <a href="#p10">10. Accessing and Correcting Your Information</a>
+      <a href="#p11">11. Complaints</a>
+      <a href="#p12">12. Changes to This Privacy Policy</a>
+      <a href="#p13">13. Contact Us</a>
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <!-- PART 1: TERMS AND CONDITIONS   -->
+  <!-- ============================== -->
+  <div class="part-divider" id="part1">
+    <h2>Part 1 — Terms and Conditions</h2>
+  </div>
+
+  <section id="t1">
+    <h3>1. Introduction and Acceptance</h3>
+    <p>Please read these terms and conditions ("Terms"). They apply to your use of the Earmarked desktop application ("Application") and any associated updates or support made available by Earmarked Pty Ltd ("we", "us", "our", or "Earmarked"). By installing, accessing, or using the Application, you agree to be bound by these Terms.</p>
+    <p>Earmarked is a locally installed macOS application designed for personal financial management. The Application operates primarily on your device, and your financial data is stored locally on your computer. Earmarked does not intentionally collect, transmit, or store your financial data on any external server. Limited non-financial information may be transmitted in connection with subscription verification, anonymised crash reporting (where you have opted in), or user-initiated support correspondence, as described in our Privacy Policy.</p>
+    <p>From time to time we may update these Terms. We will provide you with reasonable notice of any significant changes through the Application or by email. Your continued use of the Application after notification of such a change means that you accept the updated Terms. If you do not agree with any changes, you should discontinue use of the Application.</p>
+  </section>
+
+  <section id="t2">
+    <h3>2. Eligibility</h3>
+    <p>You must be at least 18 years of age to use the Application. By installing and using the Application, you represent and warrant that you meet this age requirement and have the legal capacity to enter into these Terms.</p>
+  </section>
+
+  <section id="t3">
+    <h3>3. Nature of the Service</h3>
+    <p>The Application provides tools for organising, categorising, and analysing your personal financial transactions. Any information, insights, categorisations, or suggestions generated by the Application (including those produced by on-device artificial intelligence features) are for informational and organisational purposes only.</p>
+    <p>Earmarked does not hold an Australian Financial Services Licence (AFSL) and does not provide personal financial advice within the meaning of the <em class="leg">Corporations Act 2001</em> (Cth). The Application is not intended to replace professional financial, tax, or legal advice. Before making any financial decision, you should consider whether the information is appropriate to your needs, objectives, and circumstances, with or without the assistance of a qualified adviser.</p>
+  </section>
+
+  <section id="t4">
+    <h3>4. Local-First Architecture and Data Ownership</h3>
+    <p>The Application is designed with a local-first, privacy-first architecture. This means:</p>
+    <p>Your financial data (including imported bank transactions, categories, and any data you enter) is stored locally on your macOS device in the Application's designated storage directory. Earmarked does not have access to, nor does it transmit, your financial data to any server or third party. All data remains entirely under your control on your device.</p>
+    <p>On-device AI features (such as transaction categorisation and financial insights) are processed locally on your device using bundled language models. These models run entirely on your hardware, and no financial data is sent to external AI services for processing.</p>
+    <p>You may import transaction data via CSV, OFX, or other supported file formats. No external service is contacted during import.</p>
+    <p>You are solely responsible for maintaining backups of your local data. Earmarked is not liable for any loss of data resulting from hardware failure, accidental deletion, operating system issues, or any other cause. We recommend maintaining regular backups of your device using Time Machine or a similar backup solution.</p>
+  </section>
+
+  <section id="t5">
+    <h3>5. Subscription and Payment</h3>
+    <p>Access to the Application may require a paid subscription, managed through Apple's App Store using StoreKit auto-renewable subscriptions. Subscription pricing, billing periods, and any introductory offers are displayed in the App Store and within the Application prior to purchase.</p>
+    <p>Subscriptions automatically renew at the end of each billing period unless cancelled at least 24 hours before the end of the current period. You may manage or cancel your subscription through your Apple ID account settings. Refunds are handled in accordance with Apple's refund policy.</p>
+  </section>
+
+  <section id="t6">
+    <h3>6. Intellectual Property</h3>
+    <p>All content, code, design, graphics, logos, and other materials in the Application are protected by intellectual property rights (including copyright, trademarks, and patents). Earmarked Pty Ltd owns or licences all such rights.</p>
+    <p>You are granted a limited, non-exclusive, non-transferable, revocable licence to use the Application for your personal, non-commercial financial management purposes, subject to these Terms. You may not copy, modify, distribute, reverse-engineer, decompile, or create derivative works from the Application without our prior written consent.</p>
+    <p>Your financial data remains your property. Earmarked claims no ownership rights over any data you import, enter, or generate within the Application.</p>
+  </section>
+
+  <section id="t7">
+    <h3>7. Limitation of Liability</h3>
+    <p>To the maximum extent permitted by Australian law, Earmarked, its directors, employees, contractors, and related entities shall not be liable for any loss or damage arising from or in connection with:</p>
+    <p class="indent">(a) your use of, or inability to use, the Application; (b) any inaccuracy, error, or omission in information provided by or generated within the Application, including AI-generated categorisations and insights; (c) loss of data stored locally on your device, howsoever caused; (d) defects, viruses, or malfunctions affecting your equipment in connection with the Application; (e) any reliance you place on information provided by the Application; or (f) claims by third parties in connection with your use of the Application.</p>
+    <p>Nothing in these Terms excludes, restricts, or modifies any consumer guarantee or other right under the <em class="leg">Australian Consumer Law</em> (Schedule 2 of the <em class="leg">Competition and Consumer Act 2010</em> (Cth)) or any equivalent state or territory legislation that cannot be lawfully excluded. Where our liability cannot be excluded, it is limited, at our option and to the maximum extent permitted by law, to: (i) the total fees paid by you for the Application in the 12 months preceding the event giving rise to the claim; or (ii) resupplying the Application or the relevant part of it to you.</p>
+  </section>
+
+  <section id="t8">
+    <h3>8. Disclaimers</h3>
+    <p>Except as expressly set out in these Terms, the Application is provided on an "as is" and "as available" basis. To the extent permitted by law, we make no representations or warranties (express or implied) regarding the accuracy, completeness, reliability, suitability, or availability of the Application or the information it generates.</p>
+    <p>AI-generated outputs (including transaction categorisation, insights, and suggestions) are produced by on-device language models and may contain errors, inaccuracies, or omissions. Earmarked makes no guarantee of the accuracy, completeness, reliability, or suitability of any AI-generated output for any particular purpose. AI outputs do not constitute financial advice and should not be treated as such. You are solely responsible for verifying any AI-generated information before relying on it for financial or other decisions.</p>
+    <p>We do not guarantee the performance of any financial product or strategy referred to or suggested by the Application. All currency references within the Application are to Australian dollars (AUD) unless otherwise specified.</p>
+  </section>
+
+  <section id="t9">
+    <h3>9. Acceptable Use</h3>
+    <p>You agree to use the Application only for lawful purposes and in accordance with these Terms. In particular, you agree that you will not:</p>
+    <p class="indent">(a) use any robot, spider, scraper, or other automated tool, program, algorithm, or methodology to access, copy, monitor, or extract any part of the Application or its contents, without our prior written consent;</p>
+    <p class="indent">(b) attempt to decipher, decompile, disassemble, reverse-engineer, or otherwise attempt to derive the source code of the Application or any component thereof, including but not limited to the bundled language models, embeddings, or database schema;</p>
+    <p class="indent">(c) extract, copy, redistribute, or commercially exploit the bundled AI models, model weights, or any other machine learning components included in the Application;</p>
+    <p class="indent">(d) remove, alter, or obscure any copyright, trademark, or other proprietary notices contained in the Application;</p>
+    <p class="indent">(e) use the Application in any manner that could damage, disable, overburden, or impair the Application or interfere with any other party's use of the Application; or</p>
+    <p class="indent">(f) use the Application for any purpose that is fraudulent, illegal, or otherwise prohibited by these Terms or by applicable law.</p>
+    <p>Violation of any of the above may result in immediate termination of your licence to use the Application.</p>
+  </section>
+
+  <section id="t10">
+    <h3>10. Termination</h3>
+    <h4>Termination by You</h4>
+    <p>You may terminate these Terms at any time by uninstalling the Application and, if applicable, cancelling your subscription through your Apple ID account settings. No notice to Earmarked is required.</p>
+    <h4>Termination by Earmarked</h4>
+    <p>We may terminate or suspend your licence to use the Application at any time if: (a) you breach any provision of these Terms, including the Acceptable Use provisions in Section 9; (b) we are required to do so by law; or (c) we decide to discontinue the Application, in which case we will provide reasonable notice where practicable.</p>
+    <h4>Effect of Termination</h4>
+    <p>Upon termination of these Terms for any reason: (a) your licence to use the Application is immediately revoked; (b) you should uninstall the Application from your device; and (c) any provisions of these Terms that by their nature should survive termination will continue to apply, including Sections 6 (Intellectual Property), 7 (Limitation of Liability), 8 (Disclaimers), and 11 (Indemnification).</p>
+    <p>Because your financial data is stored locally on your device and is not held by Earmarked, termination of these Terms does not affect your ability to access, export, or delete data already stored on your device. However, you will no longer be entitled to receive updates, support, or access to subscription-dependent features.</p>
+  </section>
+
+  <section id="t11">
+    <h3>11. Indemnification</h3>
+    <p>To the maximum extent permitted by Australian law, you agree to defend, indemnify, and hold harmless Earmarked Pty Ltd, its directors, officers, employees, contractors, and agents from and against any and all claims, damages, obligations, losses, liabilities, costs, or expenses (including reasonable legal fees) arising from or in connection with:</p>
+    <p class="indent">(a) your use of, or access to, the Application; (b) your breach of any term of these Terms or any representation or warranty contained herein; (c) your violation of any applicable law, regulation, or third-party right, including without limitation any intellectual property or privacy right; or (d) any claim by a third party arising from or related to your use of the Application.</p>
+    <p>This indemnification obligation will survive the termination of these Terms and your use of the Application. Nothing in this clause limits or excludes any rights you may have under the <em class="leg">Australian Consumer Law</em> or any other statutory rights that cannot be lawfully excluded or limited.</p>
+  </section>
+
+  <section id="t12">
+    <h3>12. Application Updates and Modifications</h3>
+    <p>From time to time, we may release updates to the Application that include new features, improvements, bug fixes, or security patches. Updates may be delivered through the Mac App Store. We will provide reasonable notice of any updates that have a significant effect on your usage of the Application.</p>
+    <p>We reserve the right to modify, suspend, or discontinue any aspect of the Application at any time, with reasonable notice where practicable. We will not be liable for any modification, suspension, or discontinuance of the Application.</p>
+  </section>
+
+  <section id="t13">
+    <h3>13. Dispute Resolution</h3>
+    <p>If you have a dispute or complaint arising from or relating to these Terms or your use of the Application, we encourage you to first contact us at <a href="mailto:earmarked.info@gmail.com" class="email">earmarked.info@gmail.com</a> so that we can attempt to resolve the matter informally.</p>
+    <p>If the dispute cannot be resolved informally within 30 days, either party may refer the dispute to mediation administered by the Resolution Institute (or its successor body) before commencing court proceedings. The costs of mediation will be shared equally between the parties.</p>
+    <p>These Terms are governed by the laws of the State of Victoria, Australia. Subject to the dispute resolution process above, the parties irrevocably submit to the non-exclusive jurisdiction of the courts of Victoria and any courts of appeal from them.</p>
+  </section>
+
+  <section id="t14">
+    <h3>14. Business Continuity and Change of Ownership</h3>
+    <p>In the event that Earmarked Pty Ltd is acquired, merged, or ceases operations, we will provide you with at least 60 days' written notice. Because your financial data is stored locally on your device, a change of ownership or cessation of Earmarked does not affect your access to data already stored in the Application.</p>
+    <p>During the notice period, you will continue to have full access to the Application and your locally stored data. We recommend exporting your data as a precaution in the event that future updates are no longer provided.</p>
+  </section>
+
+  <section id="t15">
+    <h3>15. Apple App Store Terms</h3>
+    <p>If you downloaded the Application from the Mac App Store, you acknowledge and agree that: (a) these Terms are between you and Earmarked only, and not with Apple Inc. ("Apple"); (b) Apple has no obligation to provide maintenance or support for the Application; (c) in the event of any failure of the Application to conform to any applicable warranty, Apple's sole obligation is to refund the purchase price (if any) of the Application; (d) Apple is not responsible for addressing any claims relating to the Application; and (e) Apple and its subsidiaries are third-party beneficiaries of these Terms and may enforce them against you.</p>
+  </section>
+
+  <section id="t16">
+    <h3>16. Entire Agreement</h3>
+    <p>These Terms, together with the Privacy Policy set out in Part 2, constitute the entire agreement between you and Earmarked with respect to your use of the Application. They supersede all prior or contemporaneous communications, proposals, representations, understandings, and agreements, whether oral or written, relating to the subject matter of these Terms.</p>
+    <p>No statement, representation, warranty, or agreement made outside of these Terms (including in marketing materials, support correspondence, or pre-release communications) will form part of these Terms unless expressly incorporated by written amendment.</p>
+  </section>
+
+  <section id="t17">
+    <h3>17. Severability</h3>
+    <p>If any provision of these Terms is found to be void, unenforceable, or illegal in any jurisdiction, that provision is severed for that jurisdiction only. The remainder of these Terms will continue in full force and effect, and the validity or enforceability of that provision in any other jurisdiction is not affected.</p>
+  </section>
+
+  <!-- ======================== -->
+  <!-- PART 2: PRIVACY POLICY   -->
+  <!-- ======================== -->
+  <div class="part-divider" id="part2">
+    <h2>Part 2 — Privacy Policy</h2>
+  </div>
+
+  <section id="p1">
+    <h3>1. Overview</h3>
+    <p>This Privacy Policy explains how Earmarked Pty Ltd ("Earmarked", "we", "us", "our") handles information in connection with the Earmarked desktop application ("Application"). This policy is consistent with the Australian Privacy Principles (APPs) contained in the <em class="leg">Privacy Act 1988</em> (Cth).</p>
+    <p>Earmarked is designed with a local-first, privacy-first architecture. Your financial data is stored on your device and the Application is not designed to transmit your financial data to Earmarked or any third party. Except as described in Section 4 below, Earmarked does not intentionally collect, store, or access your financial data. As a result, this Privacy Policy is limited in scope — it addresses the minimal information involved in your use of the Application and your interactions with us.</p>
+    <p>In this Privacy Policy, "personal information" has the meaning given to that term in section 6 of the <em class="leg">Privacy Act 1988</em> (Cth), being information or an opinion about an identified individual, or an individual who is reasonably identifiable, whether the information or opinion is true or not and whether the information or opinion is recorded in a material form or not.</p>
+  </section>
+
+  <section id="p2">
+    <h3>2. Data Stored Locally on Your Device</h3>
+    <p>The following data is stored exclusively on your macOS device and is not designed to be transmitted to Earmarked or any third party:</p>
+    <p class="indent">(a) Financial transaction data imported from CSV, OFX, or other file formats; (b) transaction categories, tags, notes, and any other financial annotations you create; (c) AI-generated categorisations, embeddings, and insights produced by the on-device language model; and (d) application preferences and configuration settings.</p>
+    <p>This data is stored in the Application's local database within your macOS Application Support directory. The Application is not designed to transmit this data to Earmarked or provide us with remote access to it. You have full control over this data and may delete it at any time by removing it from within the Application or by uninstalling the Application.</p>
+  </section>
+
+  <section id="p3">
+    <h3>3. Information We Do Not Collect</h3>
+    <p>Earmarked is not designed to collect, store, or process: (a) your financial transaction data; (b) bank account details or credentials; (c) government-related identifiers such as your tax file number; (d) cookies or browser-based tracking data (the Application is a native desktop application and does not use a browser or cookies); or (e) any personal or sensitive information beyond what is described in Section 4 below.</p>
+    <p>If we inadvertently come into possession of government-related identifiers or any unsolicited personal or sensitive information, we will notify you and take reasonable steps to de-identify and securely destroy the information as soon as practicable.</p>
+  </section>
+
+  <section id="p4">
+    <h3>4. Information Involved in Using the Application</h3>
+    <p>The Application is designed to function without collecting personal information. Where we do handle any personal information, we do so only where it is reasonably necessary for the purposes described below, or where you have provided consent. The following limited information may be involved in your use of the Application:</p>
+    <p class="indent">(a) Apple ID and subscription records — if you purchase a subscription through the Mac App Store, Apple manages the transaction. We receive anonymised subscription status confirmations through StoreKit but do not receive or store your Apple ID, payment card details, or billing address.</p>
+    <p class="indent">(b) Support correspondence — if you contact us at <a href="mailto:earmarked.info@gmail.com" class="email">earmarked.info@gmail.com</a>, we will receive your email address and the content of your message. We use this information solely to respond to your enquiry and do not add it to any marketing database.</p>
+    <p class="indent">(c) Anonymised crash reports — with your consent, the Application may send crash and diagnostic data to help us identify and fix bugs. We take reasonable steps to ensure this data does not include financial information or personally identifiable information; however, crash reports may incidentally contain device-level information such as hardware identifiers, operating system version, and timestamps. You may opt out of crash reporting at any time in the Application's settings.</p>
+  </section>
+
+  <section id="p5">
+    <h3>5. How We Use Information</h3>
+    <p>Any information we receive is used solely for the following purposes: (a) to verify your subscription status; (b) to respond to support enquiries you initiate; (c) to improve the stability and performance of the Application (via anonymised crash data, where you have opted in); and (d) to comply with legal obligations.</p>
+    <p>We will not sell any information to any third party. We will not use any information for marketing purposes unless you explicitly opt in to receive marketing communications from us.</p>
+  </section>
+
+  <section id="p6">
+    <h3>6. Third-Party Disclosure</h3>
+    <p>Because Earmarked is not designed to collect or store your financial data, and the personal information we hold is minimal (limited to support correspondence and anonymised diagnostics), third-party disclosure is extremely limited. We may share information only in the following circumstances:</p>
+    <p class="indent">(a) Crash reporting services — anonymised, non-identifying diagnostic data only, where you have opted in. (b) Legal and regulatory authorities — where required by Australian law.</p>
+    <p>In accordance with APP 8 (cross-border disclosure), crash reporting and diagnostic services may involve providers located in the United States. Where we engage any overseas service provider, we take reasonable steps to ensure the overseas recipient handles information consistently with the APPs. If the countries involved change, we will update this Privacy Policy accordingly.</p>
+  </section>
+
+  <section id="p7">
+    <h3>7. Data Retention and Deletion</h3>
+    <p>Your financial data is stored locally on your device and is entirely under your control. You may delete all locally stored data at any time by removing it from within the Application, resetting the Application's database, or uninstalling the Application. No action from Earmarked is required to delete your data, as we do not hold it.</p>
+    <p>If you have contacted us via email for support, we retain your correspondence for a reasonable period to ensure continuity of support. You may request deletion of your support correspondence at any time by emailing <a href="mailto:earmarked.info@gmail.com" class="email">earmarked.info@gmail.com</a>, and we will delete it within 30 days.</p>
+  </section>
+
+  <section id="p8">
+    <h3>8. Data Security</h3>
+    <p>Because your financial data is stored locally on your device, its security is primarily dependent on your device's own security measures (including FileVault encryption, user account passwords, and physical device security). We recommend enabling FileVault and keeping your macOS installation up to date.</p>
+    <p>For any limited data we do handle (such as support correspondence), we take reasonable steps to protect it from misuse, interference, loss, unauthorised access, modification, and disclosure.</p>
+  </section>
+
+  <section id="p9">
+    <h3>9. Data Breach Notification</h3>
+    <p>Because Earmarked's local-first architecture means your financial data is not stored on our servers, the risk of a data breach affecting your financial information is significantly reduced. However, in the unlikely event of a breach involving any information we do hold (such as support correspondence), we will:</p>
+    <p class="indent">(a) notify the Office of the Australian Information Commissioner (OAIC) as soon as practicable, in accordance with the Notifiable Data Breaches scheme under Part IIIC of the <em class="leg">Privacy Act 1988</em>; and (b) notify affected individuals, including a description of the breach, the types of information involved, and recommended steps you can take to protect yourself.</p>
+    <p>Even where we are not legally required to comply with the NDB scheme, we voluntarily commit to following this process.</p>
+  </section>
+
+  <section id="p10">
+    <h3>10. Accessing and Correcting Your Information</h3>
+    <p>You may request access to any personal information we hold about you at any time by contacting us at <a href="mailto:earmarked.info@gmail.com" class="email">earmarked.info@gmail.com</a>. Given the minimal personal information we hold, this is most likely to relate to support correspondence.</p>
+    <p>We will respond to access requests within 30 days. We will not charge for making a request or for correcting information. If we refuse access (for example, because granting access would interfere with the privacy of others), we will provide written reasons for the refusal.</p>
+    <p>If you believe personal information we hold about you is incorrect, incomplete, or out of date, you may request that we correct it. If we do not agree that correction is warranted, we will add a note to the information recording your disagreement.</p>
+  </section>
+
+  <section id="p11">
+    <h3>11. Complaints</h3>
+    <p>If you believe your privacy has been breached, please contact us at <a href="mailto:earmarked.info@gmail.com" class="email">earmarked.info@gmail.com</a> with details of your complaint. We will investigate and provide a written response within 10 business days, and no later than 45 days from the date of your initial contact.</p>
+    <p>If you are not satisfied with our response, you may lodge a complaint with the Office of the Australian Information Commissioner (OAIC) at <a href="https://www.oaic.gov.au" class="email" target="_blank" rel="noopener">www.oaic.gov.au</a>.</p>
+  </section>
+
+  <section id="p12">
+    <h3>12. Changes to This Privacy Policy</h3>
+    <p>We may update this Privacy Policy from time to time to reflect changes in our practices, the Application's features, or applicable law. If we make significant changes, we will notify you through the Application or by email before the changes take effect.</p>
+    <p>The "Last Updated" date at the top of this document indicates when this Privacy Policy was most recently revised. Your continued use of the Application after any changes take effect constitutes your acceptance of the revised Privacy Policy. We encourage you to review this Privacy Policy periodically.</p>
+  </section>
+
+  <section id="p13">
+    <h3>13. Contact Us</h3>
+    <p>If you have questions about these Terms or this Privacy Policy, wish to exercise any of your rights under the Australian Privacy Principles, or wish to make a complaint, please contact us:</p>
+    <div class="contact-block">
+      <p><strong>Earmarked Pty Ltd</strong></p>
+      <p>Email: <a href="mailto:earmarked.info@gmail.com" class="email">earmarked.info@gmail.com</a></p>
+      <p>Postal address: Available on request by emailing the address above.</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  &copy; 2026 Earmarked Pty Ltd. All rights reserved. Last updated: 6 April 2026.
+</footer>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0})" aria-label="Back to top">&uarr;</button>
+
+<script>
+  const btn = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+</script>
+
+</body>
+</html>
