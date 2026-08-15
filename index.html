@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earmarked — Coming Soon</title>
+<meta name="description" content="Earmarked is a local-first, privacy-first personal finance app for macOS. Coming soon.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --surface: #FFFFFF;
+    --text: #1A1A1A;
+    --text-secondary: #5C5C5C;
+    --accent: #E8725A;
+    --accent-light: #FDF0ED;
+    --border: #E8E6E1;
+    --heading: #111111;
+    --font-body: 'DM Sans', sans-serif;
+    --font-display: 'DM Serif Display', serif;
+    --max-width: 720px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* --- Header / nav --- */
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250, 250, 248, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .top-bar .logo {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .top-bar nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .top-bar nav a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* --- Hero --- */
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 24px;
+  }
+  .hero {
+    max-width: var(--max-width);
+    text-align: center;
+  }
+  .hero .eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 56px;
+    color: var(--heading);
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+  }
+  .hero .subtitle {
+    font-size: 19px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    max-width: 520px;
+    margin: 0 auto 32px;
+  }
+
+  .hero .contact {
+    font-size: 15px;
+    color: var(--text-secondary);
+  }
+  .hero .contact a.email {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .hero .contact a.email:hover { border-bottom-color: var(--accent); }
+
+  /* --- Footer --- */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+  }
+  footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  footer a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 38px; }
+    .hero .subtitle { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a class="logo" href="/">Earmarked</a>
+  <nav>
+    <a href="terms.html">Terms &amp; Privacy</a>
+  </nav>
+</div>
+
+<main>
+  <div class="hero">
+    <span class="eyebrow">Coming Soon</span>
+    <h1>Earmarked</h1>
+    <p class="subtitle">A local-first, privacy-first way to organise your finances — arriving soon for macOS and iOS. Your data stays on your device, always.</p>
+    <p class="contact">Questions in the meantime? <a class="email" href="mailto:support@earmarked.com.au">support@earmarked.com.au</a></p>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 Earmarked Pty Ltd. All rights reserved. &middot; <a href="terms.html">Terms &amp; Privacy</a>
+</footer>
+
+</body>
+</html>
