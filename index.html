@@ -3,171 +3,523 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Earmarked — Coming Soon</title>
-<meta name="description" content="Earmarked is a local-first, privacy-first personal finance app for macOS. Coming soon.">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<title>Earmarked — Clarity for every part of your financial life</title>
+<meta name="description" content="Earmarked is a local-first, privacy-first personal accounting app for macOS and iOS. Organise income and expenses into reports, categorise once, and see your savings and loans at a glance.">
+<link rel="icon" href="assets/app_icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0..1,0" rel="stylesheet">
 <style>
   :root {
-    --bg: #FAFAF8;
-    --surface: #FFFFFF;
-    --text: #1A1A1A;
-    --text-secondary: #5C5C5C;
-    --accent: #E8725A;
-    --accent-light: #FDF0ED;
-    --border: #E8E6E1;
-    --heading: #111111;
-    --font-body: 'DM Sans', sans-serif;
-    --font-display: 'DM Serif Display', serif;
-    --max-width: 720px;
+    --brand-coral:#FF5C5D; --brand-coral-dark:#E64344; --brand-coral-light:#FFEBEB; --brand-coral-tint:#FFF1F1;
+    --accent-teal:#14B8A6; --accent-teal-dark:#0F766E; --accent-teal-light:#99F6E4;
+    --color-success:#16A34A; --color-success-bg:#F0FDF4;
+    --color-danger:#DC2626; --color-danger-bg:#FEF2F2;
+    --color-warning:#F97316; --color-warning-bg:#FFF7ED;
+    --gray-500:#9E9E9E; --gray-900:#212121;
+    --surface:#FFFFFF; --surface-container:#F7F5F4; --surface-container-high:#EFEDEC;
+    --on-surface:#1C1B1B; --on-surface-variant:#4A4544;
+    --outline:#D8D3D2; --outline-variant:#E8E4E3;
+    --primary:var(--brand-coral); --primary-container:var(--brand-coral-light); --on-primary-container:var(--brand-coral-dark);
+    --text-faint:var(--gray-500);
+    --link:var(--brand-coral); --link-hover:var(--brand-coral-dark);
+    --shadow-card:0 2px 10px rgba(0,0,0,0.05); --shadow-raised:0 4px 16px rgba(0,0,0,0.08); --shadow-dialog:0 8px 32px rgba(0,0,0,0.16);
+    --font-system:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--surface-container); color:var(--on-surface); font-family:var(--font-system); -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; flex-direction:column; }
+  a { color:var(--link); text-decoration:none; }
+  a:hover { color:var(--link-hover); }
+  h1,h2,h3,p { margin:0; }
+  main { flex:1; }
+  .material-symbols { font-family:'Material Symbols Outlined'; font-weight:normal; font-style:normal; font-size:24px; line-height:1; letter-spacing:normal; text-transform:none; display:inline-block; white-space:nowrap; direction:ltr; -webkit-font-feature-settings:'liga'; font-feature-settings:'liga'; }
+  .wrap { max-width:1160px; margin:0 auto; padding:88px 24px; }
+  .band { background:var(--surface); border-top:1px solid var(--outline-variant); border-bottom:1px solid var(--outline-variant); }
+  section[id] { scroll-margin-top:60px; }
+
+  /* Buttons & chips (design-system Button / Chip) */
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; border:none; border-radius:999px; background:var(--primary); color:#fff; font:500 14px var(--font-system); padding:12px 24px; cursor:pointer; transition:background-color .15s ease; }
+  .btn:hover { background:var(--brand-coral-dark); color:#fff; }
+  .btn.sm { font-size:13px; padding:8px 16px; }
+  .btn.tonal { background:var(--primary-container); color:var(--on-primary-container); }
+  .btn.tonal:hover { background:#FFDCDC; color:var(--on-primary-container); }
+  .chip { display:inline-flex; align-items:center; gap:4px; border-radius:4px; padding:4px 8px; font-size:12px; font-weight:500; line-height:1; background:var(--surface-container-high); color:var(--on-surface-variant); }
+  .chip.primary { background:var(--primary-container); color:var(--on-primary-container); }
+  .chip.teal { background:#E6FBF8; color:var(--accent-teal-dark); }
+  .chip.danger { background:var(--color-danger-bg); color:var(--color-danger); }
+  .chip.warning { background:var(--color-warning-bg); color:var(--color-warning); }
+  .chip.hero { font-size:13px; padding:6px 12px; }
+
+  /* Header */
+  header.top { position:sticky; top:0; z-index:10; background:var(--surface); border-bottom:1px solid var(--outline-variant); }
+  header.top .in { max-width:1160px; margin:0 auto; padding:12px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .brand { display:flex; align-items:center; gap:10px; color:var(--on-surface); }
+  .brand:hover { color:var(--on-surface); }
+  .brand img { width:32px; height:32px; border-radius:8px; }
+  .brand span { font-size:18px; font-weight:700; }
+  header.top nav { display:flex; align-items:center; gap:24px; flex-wrap:wrap; font-size:14px; }
+  header.top nav a:not(.btn) { color:var(--on-surface-variant); }
+  header.top nav a:not(.btn):hover { color:var(--link-hover); }
+
+  /* Hero */
+  .hero { max-width:1160px; margin:0 auto; padding:80px 24px 88px; display:flex; flex-direction:column; align-items:center; gap:56px; }
+  .hero-copy { display:flex; flex-direction:column; gap:20px; align-items:center; text-align:center; max-width:760px; }
+  .hero h1 { font-size:60px; line-height:1.05; font-weight:700; letter-spacing:-0.03em; text-wrap:balance; }
+  .hero .sub { font-size:20px; line-height:1.5; color:var(--on-surface-variant); max-width:600px; text-wrap:pretty; }
+  .hero .btn { margin-top:4px; padding:14px 28px; font-size:15px; }
+  .hero-shot { width:100%; max-width:1040px; }
+  .hero-shot img { display:block; width:100%; height:auto; border-radius:12px; border:1px solid var(--outline); box-shadow:var(--shadow-dialog); }
+
+  /* Section headings */
+  .sec-head { display:flex; flex-direction:column; gap:10px; max-width:600px; }
+  .sec-head h2, .h2 { font-size:40px; line-height:1.1; font-weight:700; letter-spacing:-0.02em; }
+  .sec-head p { font-size:18px; line-height:1.5; color:var(--on-surface-variant); }
+
+  /* How it works */
+  .steps { display:flex; flex-direction:column; gap:56px; }
+  .step { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr)); gap:48px; align-items:center; }
+  .step-copy { display:flex; flex-direction:column; gap:12px; max-width:460px; }
+  .step-num { width:36px; height:36px; border-radius:50%; background:var(--primary); color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .step h3 { font-size:24px; line-height:1.25; font-weight:700; }
+  .step-copy p { font-size:16px; line-height:1.6; color:var(--on-surface-variant); text-wrap:pretty; }
+  .mock { background:var(--surface-container); border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:12px; }
+  .row-card { background:#fff; border-radius:12px; box-shadow:var(--shadow-card); padding:14px 16px; display:flex; align-items:center; gap:12px; }
+  .row-card .grow { flex:1; min-width:0; }
+  .row-card .t { font-size:14px; font-weight:600; }
+  .row-card .m { font-size:12px; color:var(--on-surface-variant); }
+  .mock-head { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; }
+  .mock-head .t { font-size:14px; font-weight:600; }
+  .file-card { background:#fff; border-radius:12px; box-shadow:var(--shadow-card); padding:16px; display:flex; flex-direction:column; gap:12px; }
+  .cols { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+  .cols > span:first-child { font-size:12px; color:var(--on-surface-variant); }
+  .txns { background:#fff; border-radius:12px; box-shadow:var(--shadow-card); overflow:hidden; }
+  .txn { display:grid; grid-template-columns:52px minmax(0,1fr) auto auto; gap:12px; align-items:center; padding:12px 16px; border-bottom:1px solid var(--outline-variant); font-size:13px; }
+  .txn .d { color:var(--on-surface-variant); }
+  .txn .desc { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .txn .cat { font-size:12px; font-weight:500; padding:2px 8px; border-radius:4px; }
+  .txn .amt { font-weight:700; color:var(--color-danger); text-align:right; min-width:64px; }
+  .cat.ok { background:var(--color-success-bg); color:var(--color-success); }
+  .cat.warn { background:var(--color-warning-bg); color:var(--color-warning); }
+
+  /* Insights */
+  .insights-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr)); gap:40px; align-items:center; }
+  .insight-list { display:flex; flex-direction:column; gap:12px; }
+  .insight { all:unset; box-sizing:border-box; cursor:pointer; border-radius:12px; padding:18px 20px; display:flex; flex-direction:column; gap:6px; transition:background .15s; }
+  .insight:hover { background:#fff; }
+  .insight:focus-visible { outline:2px solid var(--primary); outline-offset:2px; }
+  .insight .hd { display:flex; align-items:center; gap:10px; }
+  .insight .hd .material-symbols { font-size:22px; color:var(--on-surface-variant); }
+  .insight .hd span:last-child { font-size:17px; font-weight:600; }
+  .insight p { display:none; font-size:15px; line-height:1.6; color:var(--on-surface-variant); text-wrap:pretty; }
+  .insight.active { background:#fff; box-shadow:var(--shadow-raised); }
+  .insight.active .hd .material-symbols { color:var(--primary); }
+  .insight.active p { display:block; }
+  .frame-wrap { display:flex; align-items:center; justify-content:center; min-width:0; }
+  .frame { width:640px; height:640px; max-width:100%; border-radius:12px; border:1px solid var(--outline); background:var(--surface); box-shadow:var(--shadow-dialog); overflow:hidden; display:flex; flex-direction:column; }
+  .titlebar { height:32px; flex:none; background:var(--surface-container-high); display:flex; align-items:center; gap:7px; padding:0 12px; border-bottom:1px solid var(--outline-variant); }
+  .titlebar i { width:11px; height:11px; border-radius:50%; display:block; }
+  .app { flex:1; display:flex; min-height:0; }
+  .side { width:78px; flex:none; background:var(--surface); border-right:1px solid var(--outline-variant); padding:16px 0; display:flex; flex-direction:column; align-items:center; gap:14px; }
+  .side img { width:34px; height:34px; border-radius:8px; margin-bottom:22px; }
+  .side div { display:flex; flex-direction:column; align-items:center; gap:3px; font-size:10px; font-weight:500; }
+  .side .material-symbols { font-size:20px; width:56px; height:30px; border-radius:15px; display:flex; align-items:center; justify-content:center; color:var(--on-surface-variant); }
+  .side .on { font-weight:600; }
+  .side .on .material-symbols { background:var(--accent-teal-light); color:var(--accent-teal); }
+  .screen { position:relative; flex:1; min-width:0; background:var(--surface-container); overflow:hidden; display:flex; flex-direction:column; }
+  .page-header { background:var(--primary); padding:16px 20px 24px; color:#fff; }
+  .page-header .ti { font-size:28px; font-weight:700; }
+  .page-header .su { font-size:14px; color:rgba(255,255,255,.9); margin-top:4px; }
+  .panel-body { padding:14px; display:flex; flex-direction:column; gap:12px; }
+  .panel { display:none; flex-direction:column; gap:12px; }
+  .panel.show { display:flex; }
+  .stat { background:#fff; border-radius:12px; box-shadow:var(--shadow-card); padding:16px; display:flex; flex-direction:column; gap:4px; }
+  .stat .l { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--on-surface-variant); }
+  .stat .l .material-symbols { font-size:18px; }
+  .stat .v { font-size:26px; font-weight:700; }
+  .stat .dl { display:flex; align-items:center; gap:4px; font-size:12px; font-weight:600; color:var(--color-success); }
+  .stat .dl .material-symbols { font-size:16px; }
+  .chart { background:#fff; border-radius:12px; box-shadow:var(--shadow-card); padding:14px; }
+  .chart .ct { font-size:13px; font-weight:600; margin-bottom:10px; }
+  .bars { display:flex; align-items:flex-end; gap:8px; height:170px; }
+  .bars > div { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .bars .pair { display:flex; gap:3px; align-items:flex-end; }
+  .bars .pair i { display:block; width:10px; border-radius:3px 3px 0 0; }
+  .bars small { font-size:10px; color:var(--text-faint); }
+  .table-card { background:#fff; border-radius:12px; box-shadow:var(--shadow-card); overflow:hidden; }
+  .ie { display:grid; grid-template-columns:minmax(0,1fr) auto auto; gap:12px; padding:12px 14px; font-size:12px; border-bottom:1px solid var(--outline-variant); align-items:center; }
+  .ie.h { padding:10px 14px; font-size:11px; color:var(--on-surface-variant); }
+  .ie span:nth-child(n+2) { min-width:58px; text-align:right; }
+  .ie .n { font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .ie .inc,.ie .exp { font-weight:700; text-decoration:underline; }
+  .ie .inc { color:var(--color-success); } .ie .exp { color:var(--color-danger); }
+  .menu { position:absolute; top:6px; right:8px; z-index:2; width:112px; background:#fff; border-radius:6px; box-shadow:var(--shadow-dialog); padding:4px; display:flex; flex-direction:column; font-size:11px; font-weight:600; }
+  .menu div { display:flex; align-items:center; gap:8px; padding:7px 8px; border-radius:4px; }
+  .menu div:first-child { background:var(--surface-container); }
+  .menu .material-symbols { font-size:15px; color:var(--primary); }
+  .menu .del { color:var(--color-danger); } .menu .del .material-symbols { color:var(--color-danger); }
+  .filter { background:#fff; border-radius:12px; box-shadow:var(--shadow-card); padding:10px 14px; display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; }
+  .filter .material-symbols { font-size:17px; }
+  .cat-table { background:#fff; border-radius:12px; box-shadow:var(--shadow-card); overflow:hidden; padding:12px 0 0; }
+  .cat-table .th { display:flex; justify-content:space-between; padding:0 14px 10px; font-size:13px; font-weight:700; }
+  .cat-table .th span:last-child { font-size:11px; font-weight:500; color:var(--primary); }
+  .cat-table .g { display:grid; grid-template-columns:128px repeat(5,72px); padding:9px 12px; border-bottom:1px solid var(--outline-variant); font-size:10.5px; }
+  .cat-table .g.h { background:#F6F6F6; font-weight:700; }
+  .cat-table .g.tot { background:var(--color-success-bg); font-weight:700; }
+  .cat-table .g .lnk { text-decoration:underline; }
+  .cat-table .inc { color:var(--color-success); } .cat-table .exp { color:var(--color-danger); }
+  .cat-table .g.link span { text-decoration:underline; }
+  .cat-table .g.link span:first-child { color:inherit; }
+  .scroll-x { overflow:hidden; }
+
+  /* Privacy */
+  .privacy { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr)); gap:48px; }
+  .privacy .lead { display:flex; flex-direction:column; gap:12px; max-width:500px; }
+  .privacy .lead p { font-size:18px; line-height:1.55; color:var(--on-surface-variant); text-wrap:pretty; }
+  .privacy .cards { display:flex; flex-direction:column; gap:12px; }
+  .feature { background:var(--surface-container); border-radius:12px; padding:22px; display:flex; gap:16px; }
+  .feature > .material-symbols { font-size:28px; color:var(--accent-teal); }
+  .feature div { display:flex; flex-direction:column; gap:6px; }
+  .feature h3 { font-size:17px; font-weight:600; }
+  .feature p { font-size:15px; line-height:1.6; color:var(--on-surface-variant); }
+
+  /* Why / Who */
+  .two-col { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:40px 64px; align-items:start; }
+  .two-col h2 { font-size:44px; line-height:1.1; font-weight:700; letter-spacing:-0.02em; }
+  .two-col .body { grid-column:span 2; min-width:0; display:flex; flex-direction:column; gap:22px; max-width:620px; }
+  .two-col p { font-size:18px; line-height:1.7; color:var(--on-surface-variant); text-wrap:pretty; }
+  .two-col p.strong { color:var(--on-surface); font-weight:600; }
+  .who { background:var(--surface-container); border-top:1px solid var(--outline-variant); }
+  .who .two-col > p { grid-column:span 2; max-width:620px; }
+
+  /* CTA */
+  .cta { background:var(--primary); color:#fff; }
+  .cta .in { max-width:1160px; margin:0 auto; padding:72px 24px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; }
+  .cta h2 { font-size:40px; line-height:1.1; font-weight:700; letter-spacing:-0.02em; }
+  .cta a { margin-top:12px; background:#fff; color:var(--brand-coral-dark); font-weight:600; font-size:15px; padding:12px 28px; border-radius:999px; }
+  .cta a:hover { background:var(--brand-coral-tint); color:var(--brand-coral-dark); }
+
+  footer { background:var(--surface); border-top:1px solid var(--outline-variant); }
+  footer .in { max-width:1160px; margin:0 auto; padding:24px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; font-size:13px; color:var(--on-surface-variant); }
+  footer .links { display:flex; gap:20px; }
+  footer a { color:var(--on-surface-variant); }
+  footer a:hover { color:var(--link-hover); }
+
+  @media (max-width:700px) {
+    .hero { padding:56px 24px 64px; }
+    .hero h1 { font-size:40px; }
+    .hero .sub { font-size:18px; }
+    .sec-head h2, .h2, .cta h2 { font-size:32px; }
+    .two-col h2 { font-size:34px; }
+    .wrap { padding:64px 24px; }
+    .two-col .body, .who .two-col > p { grid-column:auto; }
+    .frame { height:560px; }
+    .side { display:none; }
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.75;
-    color: var(--text);
-    background: var(--bg);
-    -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* --- Header / nav --- */
-  .top-bar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(250, 250, 248, 0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
-    color: var(--text-secondary);
-  }
-  .top-bar .logo {
-    font-family: var(--font-display);
-    font-size: 18px;
-    color: var(--accent);
-    letter-spacing: -0.02em;
-    text-decoration: none;
-  }
-  .top-bar nav a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 14px;
-    padding-bottom: 2px;
-    border-bottom: 1px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .top-bar nav a:hover {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-  }
-
-  /* --- Hero --- */
-  main {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 64px 24px;
-  }
-  .hero {
-    max-width: var(--max-width);
-    text-align: center;
-  }
-  .hero .eyebrow {
-    display: inline-block;
-    font-size: 13px;
-    color: var(--accent);
-    background: var(--accent-light);
-    padding: 4px 14px;
-    border-radius: 20px;
-    font-weight: 500;
-    margin-bottom: 20px;
-  }
-  .hero h1 {
-    font-family: var(--font-display);
-    font-size: 56px;
-    color: var(--heading);
-    letter-spacing: -0.03em;
-    margin-bottom: 16px;
-  }
-  .hero .subtitle {
-    font-size: 19px;
-    color: var(--text-secondary);
-    font-weight: 400;
-    max-width: 520px;
-    margin: 0 auto 32px;
-  }
-
-  .hero .contact {
-    font-size: 15px;
-    color: var(--text-secondary);
-  }
-  .hero .contact a.email {
-    color: var(--accent);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
-  }
-  .hero .contact a.email:hover { border-bottom-color: var(--accent); }
-
-  /* --- Footer --- */
-  footer {
-    text-align: center;
-    padding: 32px 24px;
-    font-size: 13px;
-    color: var(--text-secondary);
-    border-top: 1px solid var(--border);
-  }
-  footer a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  footer a:hover {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-  }
-
-  /* --- Responsive --- */
-  @media (max-width: 600px) {
-    .hero h1 { font-size: 38px; }
-    .hero .subtitle { font-size: 17px; }
-  }
+  /* Waitlist chooser */
+  dialog.wl { border:none; border-radius:16px; padding:28px; width:min(420px,calc(100% - 32px)); box-shadow:var(--shadow-dialog); color:var(--on-surface); font-family:var(--font-system); }
+  dialog.wl::backdrop { background:rgba(0,0,0,.4); }
+  dialog.wl h3 { font-size:20px; font-weight:700; }
+  dialog.wl p { font-size:14px; line-height:1.5; color:var(--on-surface-variant); margin-top:6px; }
+  dialog.wl .opts { display:flex; flex-direction:column; gap:10px; margin-top:20px; }
+  dialog.wl .opts a, dialog.wl .opts button { display:flex; align-items:center; justify-content:center; gap:8px; border:1px solid var(--outline); background:#fff; color:var(--on-surface); font:500 14px var(--font-system); padding:12px 16px; border-radius:999px; cursor:pointer; }
+  dialog.wl .opts a:hover, dialog.wl .opts button:hover { background:var(--surface-container); color:var(--on-surface); }
+  dialog.wl .opts .main { background:var(--primary); border-color:var(--primary); color:#fff; }
+  dialog.wl .opts .main:hover { background:var(--brand-coral-dark); color:#fff; }
+  dialog.wl .close { margin-top:14px; width:100%; border:none; background:none; color:var(--on-surface-variant); font:500 13px var(--font-system); cursor:pointer; padding:8px; }
 </style>
 </head>
 <body>
 
-<div class="top-bar">
-  <a class="logo" href="/">Earmarked</a>
-  <nav>
-    <a href="terms.html">Terms &amp; Privacy</a>
-  </nav>
-</div>
-
-<main>
-  <div class="hero">
-    <span class="eyebrow">Coming Soon</span>
-    <h1>Earmarked</h1>
-    <p class="subtitle">A local-first, privacy-first way to organise your finances — arriving soon for macOS and iOS. Your data stays on your device, always.</p>
-    <p class="contact">Questions in the meantime? <a class="email" href="mailto:support@earmarked.com.au">support@earmarked.com.au</a></p>
+<header class="top">
+  <div class="in">
+    <a class="brand" href="#top"><img src="assets/app_icon.png" alt=""><span>Earmarked</span></a>
+    <nav>
+      <a href="#how-it-works">How it works</a>
+      <a href="#insights">Insights</a>
+      <a href="#privacy">Privacy</a>
+      <a class="btn sm" data-waitlist href="mailto:support@earmarked.com.au?subject=Join%20the%20Earmarked%20waitlist&amp;body=Hi%20Earmarked%20team%2C%0A%0APlease%20add%20me%20to%20the%20waitlist.%0A%0AThanks!">Join the waitlist</a>
+    </nav>
   </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="chip primary hero">Coming Soon · macOS &amp; iOS</span>
+      <h1>Clarity for every part of your financial life.</h1>
+      <p class="sub">For couples, property investors, side hustlers and anyone whose finances have outgrown a simple budget.</p>
+      <a class="btn" data-waitlist href="mailto:support@earmarked.com.au?subject=Join%20the%20Earmarked%20waitlist&amp;body=Hi%20Earmarked%20team%2C%0A%0APlease%20add%20me%20to%20the%20waitlist.%0A%0AThanks!">Join the waitlist</a>
+    </div>
+    <div class="hero-shot">
+      <img src="assets/report-mac.png" alt="Earmarked rental property report on macOS">
+    </div>
+  </section>
+
+  <section id="how-it-works" class="band">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:56px">
+      <div class="sec-head">
+        <h2>How it works</h2>
+        <p>Three steps from a pile of bank exports to a clear picture of your money.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-copy">
+            <div class="step-num">1</div>
+            <h3>Set up reports for every part of your life</h3>
+            <p>Organise your money into separate income and expense reports for each part of your life, like household spending, rental properties or a side project. One-click templates get you set up instantly.</p>
+          </div>
+          <div class="mock">
+            <div class="mock-head"><span class="t">Reports</span><a class="btn tonal sm" href="#how-it-works" onclick="return false">Use a template</a></div>
+            <div class="row-card"><span class="material-symbols" style="color:var(--primary);font-size:22px">home</span><div class="grow"><div class="t">Household</div><div class="m">Income &amp; expenses · 14 categories</div></div><span class="material-symbols" style="color:var(--gray-500)">chevron_right</span></div>
+            <div class="row-card"><span class="material-symbols" style="color:var(--primary);font-size:22px">apartment</span><div class="grow"><div class="t">Rental property · 12 Smith St</div><div class="m">Income &amp; expenses · 9 categories</div></div><span class="material-symbols" style="color:var(--gray-500)">chevron_right</span></div>
+            <div class="row-card"><span class="material-symbols" style="color:var(--primary);font-size:22px">work</span><div class="grow"><div class="t">Side project</div><div class="m">Income &amp; expenses · 6 categories</div></div><span class="material-symbols" style="color:var(--gray-500)">chevron_right</span></div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="mock">
+            <div class="file-card">
+              <div style="display:flex;align-items:center;gap:12px">
+                <span class="material-symbols" style="color:var(--accent-teal);font-size:28px">upload_file</span>
+                <div style="flex:1"><div style="font-size:14px;font-weight:600">everyday_account_sep.csv</div><div class="m" style="font-size:12px;color:var(--on-surface-variant)">214 transactions · Everyday Account</div></div>
+                <span class="material-symbols" style="color:var(--color-success)">check_circle</span>
+              </div>
+              <div class="cols"><span>Columns detected:</span><span class="chip teal">Date</span><span class="chip teal">Description</span><span class="chip teal">Amount</span><span class="chip teal">Balance</span></div>
+            </div>
+            <div class="row-card"><span class="material-symbols" style="color:var(--on-surface-variant)">account_balance</span><div class="grow"><div class="t">Everyday Account</div><div class="m">Bank account</div></div><b style="font-size:14px;color:var(--color-success)">$4,182.50</b></div>
+            <div class="row-card"><span class="material-symbols" style="color:var(--on-surface-variant)">account_balance</span><div class="grow"><div class="t">Home Loan</div><div class="m">Loan account</div></div><b style="font-size:14px;color:var(--color-danger)">−$312,400.00</b></div>
+          </div>
+          <div class="step-copy">
+            <div class="step-num">2</div>
+            <h3>Add your accounts</h3>
+            <p>Add your bank and loan accounts and upload each account’s transactions from a CSV or Excel file. Columns are detected automatically, so there’s no fiddly mapping.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-copy">
+            <div class="step-num">3</div>
+            <h3>Categorise once, relax forever</h3>
+            <p>Categorise transactions into the right reports, with bulk categorisation for similar ones. From then on, Earmarked learns from you and categorises future uploads automatically.</p>
+          </div>
+          <div class="mock">
+            <div class="mock-head"><span class="chip warning">3 uncategorised transactions</span><a class="btn sm" href="#how-it-works" onclick="return false">Categorise similar</a></div>
+            <div class="txns">
+              <div class="txn"><span class="d">12 Sep</span><span class="desc">Woolworths Metro</span><span class="cat ok">Groceries</span><span class="amt">−$86.40</span></div>
+              <div class="txn"><span class="d">11 Sep</span><span class="desc">Body Corporate Levy</span><span class="cat warn">Uncategorised</span><span class="amt">−$1,240.00</span></div>
+              <div class="txn"><span class="d">10 Sep</span><span class="desc">Woolworths Metro</span><span class="cat warn">Uncategorised</span><span class="amt">−$42.15</span></div>
+              <div class="txn"><span class="d">08 Sep</span><span class="desc">Woolworths Metro</span><span class="cat warn">Uncategorised</span><span class="amt">−$63.90</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="insights">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:56px">
+      <div class="sec-head">
+        <h2>Then comes the fun part: insights</h2>
+        <p>Once your data is categorised, your dashboard shows the bigger picture.</p>
+      </div>
+      <div class="insights-grid">
+        <div class="insight-list" id="insight-list">
+          <button class="insight active" type="button" data-i="0">
+            <div class="hd"><span class="material-symbols">savings</span><span>Know where you stand</span></div>
+            <p>See your total savings and your loans and cards balance, each compared with last month, so you can tell at a glance which way things are moving. Track balances by month or year, and use the legend to compare what matters, like your offset against your mortgage.</p>
+          </button>
+          <button class="insight" type="button" data-i="1">
+            <div class="hd"><span class="material-symbols">compare_arrows</span><span>From big picture to every detail</span></div>
+            <p>See how each part of your finances is really tracking. Compare monthly or yearly performance side by side, then click any amount to see exactly where the money went.</p>
+          </button>
+          <button class="insight" type="button" data-i="2">
+            <div class="hd"><span class="material-symbols">table_view</span><span>Export and share in a click</span></div>
+            <p>Export any report or account to Excel to share it with your accountant.</p>
+          </button>
+        </div>
+
+        <div class="frame-wrap">
+          <div class="frame" aria-hidden="true">
+            <div class="titlebar"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
+            <div class="app">
+              <div class="side" id="side">
+                <img src="assets/app_icon.png" alt="">
+                <div class="on" data-nav="Dashboard"><span class="material-symbols">dashboard</span>Dashboard</div>
+                <div data-nav="Reports"><span class="material-symbols">bar_chart</span>Reports</div>
+                <div><span class="material-symbols">account_balance</span>Accounts</div>
+                <div><span class="material-symbols">settings</span>Settings</div>
+              </div>
+              <div class="screen">
+                <div class="page-header"><div class="ti" id="scr-title">Dashboard</div><div class="su" id="scr-sub">Compared with last month</div></div>
+                <div class="panel-body">
+
+                  <div class="panel show" data-panel="0">
+                    <div class="stat"><div class="l"><span class="material-symbols" style="color:var(--accent-teal)">savings</span>Total savings</div><div class="v">$48,250</div><div class="dl"><span class="material-symbols">arrow_upward</span>$1,120 vs last month</div></div>
+                    <div class="stat"><div class="l"><span class="material-symbols" style="color:var(--color-danger)">credit_card</span>Loans &amp; cards</div><div class="v">$312,400</div><div class="dl"><span class="material-symbols">arrow_downward</span>$1,850 less than last month</div></div>
+                    <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip teal">Offset</span><span class="chip danger">Mortgage</span><span class="chip">By month</span></div>
+                    <div class="chart">
+                      <div class="ct">Offset vs mortgage</div>
+                      <div class="bars" id="bars"></div>
+                    </div>
+                  </div>
+
+                  <div class="panel" data-panel="1">
+                    <div class="table-card">
+                      <div class="ie h"><span>Report</span><span>Income</span><span>Expenses</span></div>
+                      <div class="ie"><span class="n">Household</span><span class="inc">$92,400</span><span class="exp">$61,820</span></div>
+                      <div class="ie"><span class="n">Rental · 12 Smith St</span><span class="inc">$28,600</span><span class="exp">$19,140</span></div>
+                      <div class="ie"><span class="n">Side project</span><span class="inc">$8,250</span><span class="exp">$2,310</span></div>
+                    </div>
+                  </div>
+
+                  <div class="panel" data-panel="2">
+                    <div class="menu"><div><span class="material-symbols">download</span>Export</div><div><span class="material-symbols">edit</span>Edit</div><div class="del"><span class="material-symbols">delete</span>Delete</div></div>
+                    <div class="filter"><span class="material-symbols">filter_list</span>Filters</div>
+                    <div class="cat-table">
+                      <div class="th"><span>Income Categories</span><span>+ Add Income</span></div>
+                      <div class="g h"><span>Category</span><span>Jul 2025</span><span>Aug 2025</span><span>Sep 2025</span><span>Oct 2025</span><span>Nov 2025</span></div>
+                      <div class="g link inc"><span style="color:var(--primary)">Rent Income</span><span>$2,100</span><span>$2,100</span><span>$2,100</span><span>$2,100</span><span>$2,100</span></div>
+                      <div class="g tot inc"><span style="color:var(--on-surface)">Total</span><span>$2,100</span><span>$2,100</span><span>$2,100</span><span>$2,100</span><span>$2,100</span></div>
+                    </div>
+                    <div class="cat-table">
+                      <div class="th"><span>Expense Categories</span><span>+ Add Expense</span></div>
+                      <div class="g h"><span>Category</span><span>Jul 2025</span><span>Aug 2025</span><span>Sep 2025</span><span>Oct 2025</span><span>Nov 2025</span></div>
+                      <div class="g link exp"><span>Fixed Cost - Council rates</span><span>$0</span><span>$0</span><span>-$438</span><span>$0</span><span>-$438</span></div>
+                      <div class="g link exp"><span>Fixed Cost - Water rates</span><span>$0</span><span>-$168</span><span>$0</span><span>-$173</span><span>$0</span></div>
+                      <div class="g link exp"><span>Fixed Cost - Land tax</span><span>$0</span><span>$0</span><span>-$1,248</span><span>$0</span><span>$0</span></div>
+                      <div class="g link exp"><span>Fixed Cost - Insurance</span><span>$0</span><span>$0</span><span>$0</span><span>$0</span><span>$0</span></div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="privacy" class="band">
+    <div class="wrap privacy">
+      <div class="lead">
+        <h2 class="h2">Your data is yours</h2>
+        <p>We think your financial data is your business. Not a product, and not something to be stored on someone else’s server.</p>
+      </div>
+      <div class="cards">
+        <div class="feature"><span class="material-symbols">lock</span><div><h3>Private by design</h3><p>Everything stays on your device and works fully offline. Only you can access it.</p></div></div>
+        <div class="feature"><span class="material-symbols">settings_backup_restore</span><div><h3>Backup &amp; restore</h3><p>Download a backup of your database whenever you like, and restore it from a file. Clearing your data automatically saves a backup first.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" class="band" style="border-top:none">
+    <div class="wrap two-col">
+      <h2>Why Earmarked?</h2>
+      <div class="body">
+        <p>You start with a simple household budget. Then life happens.</p>
+        <p>A partner. Kids. A rental property (or three). An investment company. A family trust. Maybe a side hustle.</p>
+        <p>Suddenly, your finances are scattered across spreadsheets, and you’re spending your weekends learning accounting software — all just to get a clear picture of where you stand.</p>
+        <p class="strong">That’s where Earmarked comes in.</p>
+        <p>The structure you need to keep your finances organised as life gets more complicated — with simplicity, security and privacy built in.</p>
+      </div>
+    </div>
+    <div class="who">
+      <div class="wrap two-col">
+        <h2>Who are we?</h2>
+        <p>We’re a team of accountants and software developers based in Melbourne, Australia. We believe managing your finances shouldn’t require a finance degree, a spreadsheet obsession, or your entire Sunday afternoon.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="cta">
+    <div class="in">
+      <h2>Coming Soon</h2>
+      <a data-waitlist href="mailto:support@earmarked.com.au?subject=Join%20the%20Earmarked%20waitlist&amp;body=Hi%20Earmarked%20team%2C%0A%0APlease%20add%20me%20to%20the%20waitlist.%0A%0AThanks!">Join the waitlist</a>
+    </div>
+  </section>
 </main>
 
 <footer>
-  &copy; 2026 Earmarked Pty Ltd. All rights reserved. &middot; <a href="terms.html">Terms &amp; Privacy</a>
+  <div class="in">
+    <span>© 2026 Earmarked Pty Ltd. All rights reserved.</span>
+    <div class="links"><a href="terms.html">Terms &amp; Privacy</a><a href="mailto:support@earmarked.com.au">support@earmarked.com.au</a></div>
+  </div>
 </footer>
 
+
+<dialog class="wl" id="wl">
+  <h3>Join the waitlist</h3>
+  <p>Send us a quick email at <b>support@earmarked.com.au</b> and we’ll add you. Choose how you’d like to send it:</p>
+  <div class="opts">
+    <a class="main" id="wl-app" href="#">Open my email app</a>
+    <a id="wl-gmail" href="#" target="_blank" rel="noopener">Write in Gmail</a>
+    <a id="wl-outlook" href="#" target="_blank" rel="noopener">Write in Outlook</a>
+    <button type="button" id="wl-copy">Copy email address</button>
+  </div>
+  <button class="close" type="button" id="wl-close">Close</button>
+</dialog>
+
+<script>
+(function () {
+  var months = ['Jan','Feb','Mar','Apr','May','Jun'];
+  var cmp = [[40,150],[52,147],[63,144],[71,141],[84,138],[96,135]];
+  var bars = document.getElementById('bars');
+  bars.innerHTML = cmp.map(function (b, i) {
+    return '<div><div class="pair"><i style="height:' + b[0] + 'px;background:var(--accent-teal)"></i><i style="height:' + b[1] + 'px;background:var(--color-danger)"></i></div><small>' + months[i] + '</small></div>';
+  }).join('');
+
+  var screens = [
+    { t: 'Dashboard', s: 'Compared with last month', nav: 'Dashboard' },
+    { t: 'Reports', s: 'This Financial Year', nav: 'Reports' },
+    { t: 'Rental Property - 10 Smith St, Glenroy', s: 'John & Sarah', nav: 'Reports' }
+  ];
+  var items = document.querySelectorAll('.insight');
+  var panels = document.querySelectorAll('.panel');
+  var navs = document.querySelectorAll('#side [data-nav]');
+  var current = 0, picked = false;
+
+  function show(i) {
+    current = i;
+    items.forEach(function (el, j) { el.classList.toggle('active', j === i); });
+    panels.forEach(function (el, j) { el.classList.toggle('show', j === i); });
+    document.getElementById('scr-title').textContent = screens[i].t;
+    document.getElementById('scr-sub').textContent = screens[i].s;
+    navs.forEach(function (el) { el.classList.toggle('on', el.dataset.nav === screens[i].nav); });
+  }
+  items.forEach(function (el, i) {
+    el.addEventListener('click', function () { picked = true; show(i); });
+  });
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    setInterval(function () { if (!picked) show((current + 1) % 3); }, 5000);
+  }
+  // Waitlist chooser: not everyone has a mail app configured
+  var TO = 'support@earmarked.com.au', SUBJ = 'Join the Earmarked waitlist', BODY = 'Hi Earmarked team,\n\nPlease add me to the waitlist.\n\nThanks!';
+  var q = function (o) { return Object.keys(o).map(function (k) { return k + '=' + encodeURIComponent(o[k]); }).join('&'); };
+  var dlg = document.getElementById('wl');
+  document.getElementById('wl-app').href = 'mailto:' + TO + '?' + q({ subject: SUBJ, body: BODY });
+  document.getElementById('wl-gmail').href = 'https://mail.google.com/mail/?' + q({ view: 'cm', fs: '1', to: TO, su: SUBJ, body: BODY });
+  document.getElementById('wl-outlook').href = 'https://outlook.live.com/mail/0/deeplink/compose?' + q({ to: TO, subject: SUBJ, body: BODY });
+  document.getElementById('wl-close').onclick = function () { dlg.close(); };
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  var copy = document.getElementById('wl-copy');
+  copy.onclick = function () {
+    var done = function () { copy.textContent = 'Copied ' + TO; };
+    if (navigator.clipboard) navigator.clipboard.writeText(TO).then(done, function () { copy.textContent = TO; });
+    else copy.textContent = TO;
+  };
+  document.querySelectorAll('[data-waitlist]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      if (!dlg.showModal) return; // old browsers: fall back to mailto
+      e.preventDefault();
+      copy.textContent = 'Copy email address';
+      dlg.showModal();
+    });
+  });
+})();
+</script>
 </body>
 </html>
