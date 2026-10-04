@@ -54,8 +54,7 @@
   header.top .in { max-width:1160px; margin:0 auto; padding:12px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
   .brand { display:flex; align-items:center; gap:10px; color:var(--on-surface); }
   .brand:hover { color:var(--on-surface); }
-  .brand img { width:32px; height:32px; border-radius:8px; }
-  .brand span { font-size:18px; font-weight:700; }
+  .brand img { height:28px; width:auto; display:block; }
   header.top nav { display:flex; align-items:center; gap:24px; flex-wrap:wrap; font-size:14px; }
   header.top nav a:not(.btn) { color:var(--on-surface-variant); }
   header.top nav a:not(.btn):hover { color:var(--link-hover); }
@@ -66,7 +65,9 @@
   .hero h1 { font-size:60px; line-height:1.05; font-weight:700; letter-spacing:-0.03em; text-wrap:balance; }
   .hero .sub { font-size:20px; line-height:1.5; color:var(--on-surface-variant); max-width:600px; text-wrap:pretty; }
   .hero .btn { margin-top:4px; padding:14px 28px; font-size:15px; }
-  .hero-shot { width:100%; max-width:1040px; }
+  .hero-shot { position:relative; width:100%; max-width:1040px; padding:0 120px 120px 0; }
+  .hero-shot .phone { position:absolute; right:0; bottom:0; width:34%; min-width:160px; max-width:340px; border-radius:36px; border:8px solid #212121; background:#212121; box-shadow:var(--shadow-dialog); overflow:hidden; }
+  .hero-shot .phone img { border:0; border-radius:28px; box-shadow:none; }
   .hero-shot img { display:block; width:100%; height:auto; border-radius:12px; border:1px solid var(--outline); box-shadow:var(--shadow-dialog); }
 
   /* Section headings */
@@ -206,6 +207,9 @@
   @media (max-width:700px) {
     .hero { padding:56px 24px 64px; }
     .hero h1 { font-size:40px; }
+    .hero-shot { padding:0 40px 40px 0; }
+    .hero-shot .phone { min-width:120px; border-width:5px; border-radius:24px; }
+    .hero-shot .phone img { border-radius:19px; }
     .hero .sub { font-size:18px; }
     .sec-head h2, .h2, .cta h2 { font-size:32px; }
     .two-col h2 { font-size:34px; }
@@ -232,7 +236,7 @@
 
 <header class="top">
   <div class="in">
-    <a class="brand" href="#top"><img src="assets/app_icon.png" alt=""><span>Earmarked</span></a>
+    <a class="brand" href="#top"><img src="assets/earmarked_logo_color_rgb.png" alt="Earmarked"></a>
     <nav>
       <a href="#how-it-works">How it works</a>
       <a href="#insights">Insights</a>
@@ -253,6 +257,7 @@
     </div>
     <div class="hero-shot">
       <img src="assets/report-mac.png" alt="Earmarked rental property report on macOS">
+      <div class="phone"><img src="assets/report-ios.png" alt="Earmarked reports on iPhone"></div>
     </div>
   </section>
 
